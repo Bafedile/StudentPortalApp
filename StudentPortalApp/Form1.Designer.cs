@@ -60,6 +60,7 @@
             this.examMarkLabel = new System.Windows.Forms.Label();
             this.averageMarkLabel = new System.Windows.Forms.Label();
             this.resultLabel = new System.Windows.Forms.Label();
+            this.StudentsList = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -85,6 +86,7 @@
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.flowLayoutPanel1.Controls.Add(this.label6);
+            this.flowLayoutPanel1.Controls.Add(this.StudentsList);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(321, 178);
@@ -387,6 +389,15 @@
             this.resultLabel.TabIndex = 19;
             this.resultLabel.Text = "Results";
             // 
+            // StudentsList
+            // 
+            this.StudentsList.FormattingEnabled = true;
+            this.StudentsList.Location = new System.Drawing.Point(68, 3);
+            this.StudentsList.Name = "StudentsList";
+            this.StudentsList.Size = new System.Drawing.Size(164, 21);
+            this.StudentsList.TabIndex = 20;
+            this.StudentsList.SelectedIndexChanged += new System.EventHandler(this.StudentsList_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -441,6 +452,7 @@
         private System.Windows.Forms.Label semesterMarkLabel;
         private System.Windows.Forms.Label projectMarkLabel;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox StudentsList;
     }
 }
 

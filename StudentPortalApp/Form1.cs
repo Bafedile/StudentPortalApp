@@ -12,6 +12,10 @@ namespace StudentPortalApp
 {
     public partial class Form1 : Form
     {
+        List<Student> students = new List<Student>();
+        List<Module> modules = new List<Module>();
+        string name, gender, idNum, yearOfStudy;
+        int age;
         public Form1()
         {
             InitializeComponent();
@@ -59,6 +63,21 @@ namespace StudentPortalApp
 
         private void addButton_Click(object sender, EventArgs e)
         {
+            // get marks 
+            int projectMark = Convert.ToInt32(ProjectMarksList.Text);
+            int examMark = Convert.ToInt32(ExamMarksList.Text);
+            int semesterMark = Convert.ToInt32(SemesterMarksList.Text);
+
+            Module module = new Module(ModuleList.Text,projectMark,semesterMark,examMark) ;
+            name = nameTextBox.Text;
+            idNum = IDTextBox.Text;
+            age = Convert.ToInt32(AgeTextBox.Text);
+            yearOfStudy = YearOfStudyTextBox.Text;
+            
+            Student student = new Student(name, idNum, age, gender, yearOfStudy, module);
+
+            students.Add(student);
+
 
         }
 
@@ -69,7 +88,7 @@ namespace StudentPortalApp
 
         private void clearButton_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -79,12 +98,12 @@ namespace StudentPortalApp
 
         private void ResultsTextBox_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
-
+            
         }
 
         private void AverageMarksTextBox_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
-
+            
         }
 
         private void ExamMarksList_SelectedIndexChanged(object sender, EventArgs e)
@@ -103,6 +122,11 @@ namespace StudentPortalApp
         }
 
         private void ModuleList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void StudentsList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

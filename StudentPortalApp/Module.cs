@@ -8,10 +8,10 @@ namespace StudentPortalApp
 {
     class Module
     {
-        private string moduleName { get; set; }
-        private int projectMark { get; set; }
-        private int semesterMark {get;set ;}
-        private int examMark { get; set; }
+        public string moduleName { get; set; }
+        public int projectMark { get; set; }
+        public int semesterMark {get;set ;}
+        public int examMark { get; set; }
         public Module()
         {
 

@@ -249,6 +249,11 @@
             // ModuleList
             // 
             this.ModuleList.FormattingEnabled = true;
+            this.ModuleList.Items.AddRange(new object[] {
+            "NMG316D",
+            "CSY316D",
+            "WNE316D",
+            "CNT316D"});
             this.ModuleList.Location = new System.Drawing.Point(87, 9);
             this.ModuleList.Name = "ModuleList";
             this.ModuleList.Size = new System.Drawing.Size(121, 21);

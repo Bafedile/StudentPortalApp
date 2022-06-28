@@ -8,12 +8,12 @@ namespace StudentPortalApp
 {
      class Student
     {
-        private string name { get; set; }
-        private string idNum { get; set; }
-        private int age { get; set; }
-        private string gender { get; set; }
-        private string yearOfStudy { get; set; }
-        private Module module;
+        public string name { get; set; }
+        public string idNum { get; set; }
+        public int age { get; set; }
+        public string gender { get; set; }
+        public string yearOfStudy { get; set; }
+        public Module module;
 
         public Student()
         {

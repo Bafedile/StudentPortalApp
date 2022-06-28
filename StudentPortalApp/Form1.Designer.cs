@@ -38,17 +38,17 @@
             this.ageLabel = new System.Windows.Forms.Label();
             this.GenderLabel = new System.Windows.Forms.Label();
             this.yearOfStudyLabel = new System.Windows.Forms.Label();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox3 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox4 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox5 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox6 = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTextBox7 = new System.Windows.Forms.MaskedTextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.nameTextBox = new System.Windows.Forms.MaskedTextBox();
+            this.IDTextBox = new System.Windows.Forms.MaskedTextBox();
+            this.AgeTextBox = new System.Windows.Forms.MaskedTextBox();
+            this.GenderTextBox = new System.Windows.Forms.MaskedTextBox();
+            this.YearOfStudyTextBox = new System.Windows.Forms.MaskedTextBox();
+            this.ResultsTextBox = new System.Windows.Forms.MaskedTextBox();
+            this.AverageMarksTextBox = new System.Windows.Forms.MaskedTextBox();
+            this.ModuleList = new System.Windows.Forms.ComboBox();
+            this.ProjectMarksList = new System.Windows.Forms.ComboBox();
+            this.SemesterMarksList = new System.Windows.Forms.ComboBox();
+            this.ExamMarksList = new System.Windows.Forms.ComboBox();
             this.addButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
@@ -94,11 +94,11 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.maskedTextBox5);
-            this.panel2.Controls.Add(this.maskedTextBox4);
-            this.panel2.Controls.Add(this.maskedTextBox3);
-            this.panel2.Controls.Add(this.maskedTextBox2);
-            this.panel2.Controls.Add(this.maskedTextBox1);
+            this.panel2.Controls.Add(this.YearOfStudyTextBox);
+            this.panel2.Controls.Add(this.GenderTextBox);
+            this.panel2.Controls.Add(this.AgeTextBox);
+            this.panel2.Controls.Add(this.IDTextBox);
+            this.panel2.Controls.Add(this.nameTextBox);
             this.panel2.Controls.Add(this.yearOfStudyLabel);
             this.panel2.Controls.Add(this.GenderLabel);
             this.panel2.Controls.Add(this.ageLabel);
@@ -118,12 +118,12 @@
             this.panel3.Controls.Add(this.examMarkLabel);
             this.panel3.Controls.Add(this.semesterMarkLabel);
             this.panel3.Controls.Add(this.projectMarkLabel);
-            this.panel3.Controls.Add(this.comboBox4);
-            this.panel3.Controls.Add(this.comboBox3);
-            this.panel3.Controls.Add(this.comboBox2);
-            this.panel3.Controls.Add(this.comboBox1);
-            this.panel3.Controls.Add(this.maskedTextBox7);
-            this.panel3.Controls.Add(this.maskedTextBox6);
+            this.panel3.Controls.Add(this.ExamMarksList);
+            this.panel3.Controls.Add(this.SemesterMarksList);
+            this.panel3.Controls.Add(this.ProjectMarksList);
+            this.panel3.Controls.Add(this.ModuleList);
+            this.panel3.Controls.Add(this.AverageMarksTextBox);
+            this.panel3.Controls.Add(this.ResultsTextBox);
             this.panel3.Location = new System.Drawing.Point(330, 3);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(304, 375);
@@ -188,87 +188,97 @@
             this.yearOfStudyLabel.TabIndex = 4;
             this.yearOfStudyLabel.Text = "Year Of Study";
             // 
-            // maskedTextBox1
+            // nameTextBox
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(178, 8);
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(136, 20);
-            this.maskedTextBox1.TabIndex = 5;
+            this.nameTextBox.Location = new System.Drawing.Point(178, 8);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(136, 20);
+            this.nameTextBox.TabIndex = 5;
+            this.nameTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.nameTextBox_MaskInputRejected);
             // 
-            // maskedTextBox2
+            // IDTextBox
             // 
-            this.maskedTextBox2.Location = new System.Drawing.Point(178, 44);
-            this.maskedTextBox2.Name = "maskedTextBox2";
-            this.maskedTextBox2.Size = new System.Drawing.Size(136, 20);
-            this.maskedTextBox2.TabIndex = 6;
+            this.IDTextBox.Location = new System.Drawing.Point(178, 44);
+            this.IDTextBox.Name = "IDTextBox";
+            this.IDTextBox.Size = new System.Drawing.Size(136, 20);
+            this.IDTextBox.TabIndex = 6;
+            this.IDTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.IDTextBox_MaskInputRejected);
             // 
-            // maskedTextBox3
+            // AgeTextBox
             // 
-            this.maskedTextBox3.Location = new System.Drawing.Point(178, 83);
-            this.maskedTextBox3.Name = "maskedTextBox3";
-            this.maskedTextBox3.Size = new System.Drawing.Size(136, 20);
-            this.maskedTextBox3.TabIndex = 7;
-            this.maskedTextBox3.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBox3_MaskInputRejected);
+            this.AgeTextBox.Location = new System.Drawing.Point(178, 83);
+            this.AgeTextBox.Name = "AgeTextBox";
+            this.AgeTextBox.Size = new System.Drawing.Size(136, 20);
+            this.AgeTextBox.TabIndex = 7;
+            this.AgeTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTextBox3_MaskInputRejected);
             // 
-            // maskedTextBox4
+            // GenderTextBox
             // 
-            this.maskedTextBox4.Location = new System.Drawing.Point(178, 120);
-            this.maskedTextBox4.Name = "maskedTextBox4";
-            this.maskedTextBox4.Size = new System.Drawing.Size(136, 20);
-            this.maskedTextBox4.TabIndex = 8;
+            this.GenderTextBox.Location = new System.Drawing.Point(178, 120);
+            this.GenderTextBox.Name = "GenderTextBox";
+            this.GenderTextBox.Size = new System.Drawing.Size(136, 20);
+            this.GenderTextBox.TabIndex = 8;
+            this.GenderTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.GenderTextBox_MaskInputRejected);
             // 
-            // maskedTextBox5
+            // YearOfStudyTextBox
             // 
-            this.maskedTextBox5.Location = new System.Drawing.Point(178, 158);
-            this.maskedTextBox5.Name = "maskedTextBox5";
-            this.maskedTextBox5.Size = new System.Drawing.Size(136, 20);
-            this.maskedTextBox5.TabIndex = 9;
+            this.YearOfStudyTextBox.Location = new System.Drawing.Point(178, 158);
+            this.YearOfStudyTextBox.Name = "YearOfStudyTextBox";
+            this.YearOfStudyTextBox.Size = new System.Drawing.Size(136, 20);
+            this.YearOfStudyTextBox.TabIndex = 9;
+            this.YearOfStudyTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.YearOfStudyTextBox_MaskInputRejected);
             // 
-            // maskedTextBox6
+            // ResultsTextBox
             // 
-            this.maskedTextBox6.Location = new System.Drawing.Point(177, 274);
-            this.maskedTextBox6.Name = "maskedTextBox6";
-            this.maskedTextBox6.Size = new System.Drawing.Size(112, 20);
-            this.maskedTextBox6.TabIndex = 10;
+            this.ResultsTextBox.Location = new System.Drawing.Point(177, 274);
+            this.ResultsTextBox.Name = "ResultsTextBox";
+            this.ResultsTextBox.Size = new System.Drawing.Size(112, 20);
+            this.ResultsTextBox.TabIndex = 10;
+            this.ResultsTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.ResultsTextBox_MaskInputRejected);
             // 
-            // maskedTextBox7
+            // AverageMarksTextBox
             // 
-            this.maskedTextBox7.Location = new System.Drawing.Point(177, 224);
-            this.maskedTextBox7.Name = "maskedTextBox7";
-            this.maskedTextBox7.Size = new System.Drawing.Size(112, 20);
-            this.maskedTextBox7.TabIndex = 11;
+            this.AverageMarksTextBox.Location = new System.Drawing.Point(177, 224);
+            this.AverageMarksTextBox.Name = "AverageMarksTextBox";
+            this.AverageMarksTextBox.Size = new System.Drawing.Size(112, 20);
+            this.AverageMarksTextBox.TabIndex = 11;
+            this.AverageMarksTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.AverageMarksTextBox_MaskInputRejected);
             // 
-            // comboBox1
+            // ModuleList
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(87, 9);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 12;
+            this.ModuleList.FormattingEnabled = true;
+            this.ModuleList.Location = new System.Drawing.Point(87, 9);
+            this.ModuleList.Name = "ModuleList";
+            this.ModuleList.Size = new System.Drawing.Size(121, 21);
+            this.ModuleList.TabIndex = 12;
+            this.ModuleList.SelectedIndexChanged += new System.EventHandler(this.ModuleList_SelectedIndexChanged);
             // 
-            // comboBox2
+            // ProjectMarksList
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(177, 72);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(112, 21);
-            this.comboBox2.TabIndex = 13;
+            this.ProjectMarksList.FormattingEnabled = true;
+            this.ProjectMarksList.Location = new System.Drawing.Point(177, 72);
+            this.ProjectMarksList.Name = "ProjectMarksList";
+            this.ProjectMarksList.Size = new System.Drawing.Size(112, 21);
+            this.ProjectMarksList.TabIndex = 13;
+            this.ProjectMarksList.SelectedIndexChanged += new System.EventHandler(this.ProjectMarksList_SelectedIndexChanged);
             // 
-            // comboBox3
+            // SemesterMarksList
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(177, 126);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(112, 21);
-            this.comboBox3.TabIndex = 14;
+            this.SemesterMarksList.FormattingEnabled = true;
+            this.SemesterMarksList.Location = new System.Drawing.Point(177, 126);
+            this.SemesterMarksList.Name = "SemesterMarksList";
+            this.SemesterMarksList.Size = new System.Drawing.Size(112, 21);
+            this.SemesterMarksList.TabIndex = 14;
+            this.SemesterMarksList.SelectedIndexChanged += new System.EventHandler(this.SemesterMarksList_SelectedIndexChanged);
             // 
-            // comboBox4
+            // ExamMarksList
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(177, 167);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(112, 21);
-            this.comboBox4.TabIndex = 15;
+            this.ExamMarksList.FormattingEnabled = true;
+            this.ExamMarksList.Location = new System.Drawing.Point(177, 167);
+            this.ExamMarksList.Name = "ExamMarksList";
+            this.ExamMarksList.Size = new System.Drawing.Size(112, 21);
+            this.ExamMarksList.TabIndex = 15;
+            this.ExamMarksList.SelectedIndexChanged += new System.EventHandler(this.ExamMarksList_SelectedIndexChanged);
             // 
             // addButton
             // 
@@ -278,6 +288,7 @@
             this.addButton.TabIndex = 10;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // updateButton
             // 
@@ -287,6 +298,7 @@
             this.updateButton.TabIndex = 11;
             this.updateButton.Text = "Update";
             this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // deleteButton
             // 
@@ -306,6 +318,7 @@
             this.clearButton.TabIndex = 13;
             this.clearButton.Text = "Clear";
             this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // exitButton
             // 
@@ -315,6 +328,7 @@
             this.exitButton.TabIndex = 14;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // label6
             // 
@@ -410,17 +424,17 @@
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox7;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox6;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox5;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox4;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox3;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox2;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.ComboBox ExamMarksList;
+        private System.Windows.Forms.ComboBox SemesterMarksList;
+        private System.Windows.Forms.ComboBox ProjectMarksList;
+        private System.Windows.Forms.ComboBox ModuleList;
+        private System.Windows.Forms.MaskedTextBox AverageMarksTextBox;
+        private System.Windows.Forms.MaskedTextBox ResultsTextBox;
+        private System.Windows.Forms.MaskedTextBox YearOfStudyTextBox;
+        private System.Windows.Forms.MaskedTextBox GenderTextBox;
+        private System.Windows.Forms.MaskedTextBox AgeTextBox;
+        private System.Windows.Forms.MaskedTextBox IDTextBox;
+        private System.Windows.Forms.MaskedTextBox nameTextBox;
         private System.Windows.Forms.Label resultLabel;
         private System.Windows.Forms.Label averageMarkLabel;
         private System.Windows.Forms.Label examMarkLabel;

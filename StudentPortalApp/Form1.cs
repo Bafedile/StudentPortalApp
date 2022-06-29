@@ -24,28 +24,41 @@ namespace StudentPortalApp
         MySqlConnection connection;
         MySqlCommand cmd;
         MySqlDataReader reader;
-
+        string queryResponse = "";
         public Form1()
         {
             InitializeComponent();
             generateNumbers();
             connectToDatabase();
+            populateStudentList();
         }
 
         public string getQueryResult(string query,MySqlConnection conn)
         {
             cmd = new MySqlCommand(query, conn);
             reader = cmd.ExecuteReader();
-            string queryResponse = "";
+            
             while (reader.Read())
             {
-                queryResponse += String.Format("#{0},{1},{2},{3},{4},{5},{6} ",reader["id"], reader["firstname"],
-                    reader["lastname"], reader["idnumber"], reader["age"], 
-                    reader["gender"], reader["yearofstudy"]);
+                /* queryResponse += String.Format("#{0},{1},{2},{3},{4},{5},{6} ",reader["id"], reader["firstname"],
+                     reader["lastname"], reader["idnumber"], reader["age"], 
+                     reader["gender"], reader["yearofstudy"]);*/
+                queryResponse += String.Format("#{0},{1}", reader["firstname"], reader["lastname"]);
             }
 
+            reader.Close();
             return queryResponse;
              
+        }
+       
+        public void populateStudentList()
+        {
+            string[] studentInfo = queryResponse.Split('#');
+
+            for(int i = 0; i < studentInfo.Length; i++)
+            {
+                StudentsList.Items.Add(studentInfo[i]);
+            }
         }
         public void connectToDatabase()
         {
@@ -223,21 +236,25 @@ namespace StudentPortalApp
 
         private void StudentsList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach(Student student in students)
-            {
-                if (StudentsList.SelectedItem.Equals(student.name))
-                {
-                   
-                    ProjectMarksList.Text = "0";
-                    updateFields(student);
-                   // determinePass(student.module);
-                    /*SemesterMarksList.Text = "0";
-                    ExamMarksList.Text = "0";
-                    ResultsTextBox.Text = "";
-                    AverageMarksTextBox.Text = "0";*/
+            // get the student name from the selected index 
+            name = StudentsList.Text;
 
-                }
-            }
+            // query the database to retrieve information about the student 
+            string[] studInfo = name.Split(',');
+
+            query = String.Format("select * from student_info where firstname =" +
+                " {0} and lastname = {1};", studInfo[0], studInfo[1]);
+
+            queryResponse = getQueryResult(query, connection);
+
+            studInfo = queryResponse.Split('#');
+
+            nameTextBox.Text = studInfo[1]+" " + studInfo[2];
+            IDTextBox.Text = studInfo[3];
+            AgeTextBox.Text = studInfo[4];
+            GenderTextBox.Text = studInfo[5];
+            YearOfStudyTextBox.Text = studInfo[6];
+            
             
         }
     }

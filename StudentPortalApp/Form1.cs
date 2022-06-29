@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using StudentPortalApp;
-
+using MySql.Data.MySqlClient;
 namespace StudentPortalApp
 {
     public partial class Form1 : Form
@@ -19,14 +19,57 @@ namespace StudentPortalApp
         int age;
         int projectMark, semesterMark, examMark;
         double averageMark;
-        string results;
+        string results,query;
         Module module;
+        MySqlConnection connection;
+        MySqlCommand cmd;
+        MySqlDataReader reader;
 
         public Form1()
         {
             InitializeComponent();
+            generateNumbers();
+            connectToDatabase();
         }
 
+        public string getQueryResult(string query,MySqlConnection conn)
+        {
+            cmd = new MySqlCommand(query, conn);
+            reader = cmd.ExecuteReader();
+            string queryResponse = "";
+            while (reader.Read())
+            {
+                queryResponse += String.Format("#{0},{1},{2},{3},{4},{5},{6} ",reader["id"], reader["firstname"],
+                    reader["lastname"], reader["idnumber"], reader["age"], 
+                    reader["gender"], reader["yearofstudy"]);
+            }
+
+            return queryResponse;
+             
+        }
+        public void connectToDatabase()
+        {
+            string server = "localhost";
+            string database = "Studentportal";
+            string username = "bafedile";
+            string password = "Amogelang#5%";
+            string connString = "SERVER=" + server + ";DATABASE=" + database + ";UID=" + username + ";PASSWORD=" + password+";";
+            connection = new  MySqlConnection(connString);
+            connection.Open();
+            Console.WriteLine("Database Connected");
+            query = "select * from student_info;";
+            Console.WriteLine(getQueryResult(query, connection));
+        }
+        public void generateNumbers()
+        {
+            for(int i = 0; i < 101; i++)
+            {
+                ProjectMarksList.Items.Add(i);
+                SemesterMarksList.Items.Add(i);
+                ExamMarksList.Items.Add(i);
+            }
+            
+        }
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -74,7 +117,10 @@ namespace StudentPortalApp
              examMark = Convert.ToInt32(ExamMarksList.Text);
              semesterMark = Convert.ToInt32(SemesterMarksList.Text);
 
-            Module module = new Module(ModuleList.Text,projectMark,semesterMark,examMark) ;
+            module = new Module(ModuleList.Text,projectMark,semesterMark,examMark) ;
+
+            // add module to modules list
+            modules.Add(module);
             name = nameTextBox.Text;
             idNum = IDTextBox.Text;
             age = Convert.ToInt32(AgeTextBox.Text);
@@ -112,16 +158,12 @@ namespace StudentPortalApp
 
         private void updateFields(Student student)
         {
-            nameTextBox.Text = "";
-            GenderTextBox.Text = "";
-            AgeTextBox.Text = "";
-            YearOfStudyTextBox.Text = "";
-            IDTextBox.Text = "";
-            ProjectMarksList.Text = "0";
-            SemesterMarksList.Text = "0";
-            ExamMarksList.Text = "0";
-            ResultsTextBox.Text = "";
-            AverageMarksTextBox.Text = "0";
+            nameTextBox.Text = student.name;
+            GenderTextBox.Text = student.gender;
+            AgeTextBox.Text = "" + student.age;
+            YearOfStudyTextBox.Text = student.yearOfStudy;
+            IDTextBox.Text = student.idNum;
+
         }
         private void updateButton_Click(object sender, EventArgs e)
         {
@@ -140,6 +182,7 @@ namespace StudentPortalApp
             ExamMarksList.Text = "0";
             ResultsTextBox.Text = "";
             AverageMarksTextBox.Text = "0";
+            ModuleList.Text = "";
             
         }
 
@@ -184,13 +227,10 @@ namespace StudentPortalApp
             {
                 if (StudentsList.SelectedItem.Equals(student.name))
                 {
-                    nameTextBox.Text = student.name;
-                    GenderTextBox.Text = student.gender;
-                    AgeTextBox.Text = ""+student.age;
-                    YearOfStudyTextBox.Text = student.yearOfStudy;
-                    IDTextBox.Text =student.idNum;
+                   
                     ProjectMarksList.Text = "0";
-                    determinePass(student.module);
+                    updateFields(student);
+                   // determinePass(student.module);
                     /*SemesterMarksList.Text = "0";
                     ExamMarksList.Text = "0";
                     ResultsTextBox.Text = "";
